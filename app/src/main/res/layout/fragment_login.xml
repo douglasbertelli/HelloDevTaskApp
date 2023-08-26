@@ -32,7 +32,6 @@
       android:inputType="textEmailAddress"
       android:padding="16dp" />
 
-
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -85,12 +84,13 @@
     </LinearLayout>
 
     <ProgressBar
+      android:id="@+id/progressBar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
+      android:indeterminateTint="@color/white"
       android:visibility="invisible"
-      tools:visibility="visible"
-      android:indeterminateTint="@color/white" />
+      tools:visibility="visible" />
 
   </LinearLayout>
 
