@@ -15,23 +15,20 @@
     <com.google.android.material.appbar.AppBarLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/color_default"
-      >
+      android:background="@color/color_default">
 
       <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_back"
-        >
+        app:navigationIcon="@drawable/ic_back">
 
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Criar conta"
-          android:textColor="@color/white"
           android:layout_gravity="center_horizontal"
-          />
+          android:text="Criar conta"
+          android:textColor="@color/white" />
 
       </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -54,14 +51,12 @@
 
       <EditText
         android:id="@+id/editEmail"
+        style="@style/EditTextTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="@drawable/bg_edit_text"
         android:hint="Digite seu e-mail"
-        android:inputType="textEmailAddress"
-        android:padding="16dp" />
-
+        android:inputType="textEmailAddress" />
 
       <TextView
         android:layout_width="wrap_content"
@@ -72,22 +67,20 @@
 
       <EditText
         android:id="@+id/editPassword"
+        style="@style/EditTextTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="@drawable/bg_edit_text"
         android:hint="Digite sua senha"
-        android:inputType="textPassword"
-        android:padding="16dp" />
+        android:inputType="textPassword" />
 
       <Button
         android:id="@+id/btnNewAccount"
+        style="@style/ButtonTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:background="@drawable/bg_btn"
         android:text="Criar conta"
-        android:textColor="@color/color_default"
         app:backgroundTint="@null" />
 
       <ProgressBar
@@ -96,9 +89,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
+        android:indeterminateTint="@color/white"
         android:visibility="invisible"
-        tools:visibility="visible"
-        android:indeterminateTint="@color/white" />
+        tools:visibility="visible" />
 
     </LinearLayout>
 
