@@ -20,7 +20,7 @@
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="E-mail"
+      android:text="@string/labelTextView"
       android:textColor="@color/white" />
 
     <EditText
@@ -29,14 +29,14 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
-      android:hint="Digite seu e-mail"
+      android:hint="@string/email_empty"
       android:inputType="textEmailAddress" />
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
-      android:text="Senha"
+      android:text="@string/labelTextViewPass"
       android:textColor="@color/white" />
 
     <EditText
@@ -45,7 +45,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
-      android:hint="Digite sua senha"
+      android:hint="@string/editTextPassLogin"
       android:inputType="textPassword" />
 
     <Button
@@ -54,7 +54,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="12dp"
-      android:text="Entrar"
+      android:text="@string/textBtnLogin"
       app:backgroundTint="@null" />
 
     <LinearLayout
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Criar conta"
+        android:text="@string/criar_conta"
         android:textColor="@color/white" />
 
       <TextView
@@ -76,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Recuperar conta"
+        android:text="@string/recuperar_conta"
         android:textAlignment="textEnd"
         android:textColor="@color/white" />
 

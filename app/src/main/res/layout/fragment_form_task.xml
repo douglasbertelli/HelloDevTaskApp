@@ -28,7 +28,7 @@
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Nova tarefa"
+          android:text="@string/nova_tarefa"
           android:textColor="@color/white"
           android:layout_gravity="center_horizontal"
           />
@@ -45,7 +45,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descrição"
+        android:text="@string/descricao"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Criar nova tela de login do app"
+        android:hint="@string/criar_nova_tela_de_login_do_app"
         android:inputType="text"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:layout_editor_absoluteX="16dp" />
@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Status"
+        android:text="@string/status"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDescription" />
@@ -84,7 +84,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="A Fazer"
+          android:text="@string/a_fazer"
           android:checked="true"
           android:textColor="@color/white"
           app:buttonTint="@color/white" />
@@ -94,7 +94,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Fazendo"
+          android:text="@string/fazendo"
           android:textColor="@color/white"
           app:buttonTint="@color/white" />
 
@@ -103,7 +103,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Feita"
+          android:text="@string/feita"
           android:textColor="@color/white"
           app:buttonTint="@color/white" />
 
@@ -116,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Salvar"
+        android:text="@string/salvar"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

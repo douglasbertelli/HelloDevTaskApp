@@ -19,7 +19,22 @@
 
   <!-- Form Stack Fragment -->
   <string name="description_empty_form_task_fragment">Preencha uma descrição</string>
-
+  <string name="labelTextView">E-mail</string>
+  <string name="labelTextViewPass">Senha</string>
+  <string name="editTextPassLogin">Digite sua senha</string>
+  <string name="textBtnLogin">Entrar</string>
+  <string name="recuperar_conta">Recuperar conta</string>
+  <string name="criar_conta">Criar conta</string>
+  <string name="sair_do_aplicativo">Sair do aplicativo</string>
+  <string name="nova_tarefa">Nova tarefa</string>
+  <string name="descricao">Descrição</string>
+  <string name="criar_nova_tela_de_login_do_app">Criar nova tela de login do app</string>
+  <string name="status">Status</string>
+  <string name="a_fazer">A Fazer</string>
+  <string name="fazendo">Fazendo</string>
+  <string name="feita">Feita</string>
+  <string name="salvar">Salvar</string>
+  <string name="text_current_info_recover_account">Informe seu e-mail de cadastro para receber um link para alteração da senha.</string>
 
 
 </resources>

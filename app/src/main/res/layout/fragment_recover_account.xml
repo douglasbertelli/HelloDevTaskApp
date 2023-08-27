@@ -46,7 +46,7 @@
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Informe seu e-mail de cadastro para receber um link para alteração da senha."
+        android:text="@string/text_current_info_recover_account"
         android:textAlignment="center"
         android:textColor="@color/white" />
 
