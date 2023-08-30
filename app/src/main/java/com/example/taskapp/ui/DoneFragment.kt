@@ -33,17 +33,20 @@ class DoneFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		initRecyclerView(getTasks())
+		initRecyclerView()
+		getTasks()
 	}
 
-	private fun initRecyclerView(taskList: List<Task>) {
-		taskAdapter = TaskAdapter(requireContext(), taskList) { task, option ->
+	private fun initRecyclerView() {
+		taskAdapter = TaskAdapter(requireContext()) { task, option ->
 			optionSelect(task, option)
 		}
 
-		binding.rvTasks.layoutManager = LinearLayoutManager(requireContext())
-		binding.rvTasks.setHasFixedSize(true)
-		binding.rvTasks.adapter = taskAdapter
+		with(binding.rvTasks) {
+			layoutManager = LinearLayoutManager(requireContext())
+			setHasFixedSize(true)
+			adapter = taskAdapter
+		}
 	}
 
 	private fun optionSelect(task: Task, option: Int) {
@@ -66,10 +69,14 @@ class DoneFragment : Fragment() {
 		}
 	}
 
-	private fun getTasks() = listOf(
-		Task("0", "Criar nova tela do app", Status.DONE),
-		Task("1", "Validar informações na tela do app", Status.DONE),
-	)
+	private fun getTasks() {
+		val taskList = listOf(
+			Task("0", "Criar nova tela do app", Status.DONE),
+			Task("1", "Validar informações na tela do app", Status.DONE),
+		)
+
+		taskAdapter.submitList(taskList)
+	}
 
 	override fun onDestroyView() {
 		super.onDestroyView()

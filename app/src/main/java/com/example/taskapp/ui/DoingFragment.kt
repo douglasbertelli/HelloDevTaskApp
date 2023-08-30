@@ -32,17 +32,20 @@ class DoingFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		initRecyclerView(getTasks())
+		initRecyclerView()
+		getTasks()
 	}
 
-	private fun initRecyclerView(taskList: List<Task>) {
-		taskAdapter = TaskAdapter(requireContext(), taskList) { task, option ->
+	private fun initRecyclerView() {
+		taskAdapter = TaskAdapter(requireContext()) { task, option ->
 			optionSelect(task, option)
 		}
 
-		binding.rvTasks.layoutManager = LinearLayoutManager(requireContext())
-		binding.rvTasks.setHasFixedSize(true)
-		binding.rvTasks.adapter = taskAdapter
+		with(binding.rvTasks) {
+			layoutManager = LinearLayoutManager(requireContext())
+			setHasFixedSize(true)
+			adapter = taskAdapter
+		}
 	}
 
 	private fun optionSelect(task: Task, option: Int) {
@@ -69,11 +72,15 @@ class DoingFragment : Fragment() {
 		}
 	}
 
-	private fun getTasks() = listOf(
-		Task("0", "Criar nova tela do app", Status.DOING),
-		Task("1", "Validar informações na tela do app", Status.DOING),
-		Task("2", "Adicionar nova funcionalidade no app", Status.DOING),
-	)
+	private fun getTasks() {
+		val taskList = listOf(
+			Task("0", "Criar nova tela do app", Status.DOING),
+			Task("1", "Validar informações na tela do app", Status.DOING),
+			Task("2", "Adicionar nova funcionalidade no app", Status.DOING),
+		)
+
+		taskAdapter.submitList(taskList)
+	}
 
 	override fun onDestroyView() {
 		super.onDestroyView()
