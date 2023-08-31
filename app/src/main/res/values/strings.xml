@@ -12,6 +12,7 @@
   <string name="text_button_warning">Entendi</string>
   <string name="email_empty">Preencha seu e-mail</string>
   <string name="password_empty">Preencha sua senha</string>
+  <string name="error_generic">Ocorreu um erro! Por favor tente novamente mais tarde!</string>
 
   <!-- Register Fragment -->
   <string name="email_empty_register_fragment">Preencha um e-mail válido</string>
@@ -34,11 +35,13 @@
   <string name="fazendo">Fazendo</string>
   <string name="feita">Feita</string>
   <string name="salvar">Salvar</string>
+  <string name="save_success_task_fragment">Tarefa salva com sucesso.</string>
   <string name="text_current_info_recover_account">Informe seu e-mail de cadastro para receber um link para alteração da senha.</string>
-  
+
   <!-- Home Fragment -->
   <string name="text_title_dialog_confirm_logout">Deseja sair da sua conta?</string>
   <string name="text_button_dialog_confirm_logout">Confirmar</string>
   <string name="text_message_dialog_confirm_logout">Aperte em confirmar para sair da sua conta.</string>
 
+  <string name="text_message_recover_account_fragment">Pronto, acabamos de enviar um link para o seu e-mail.</string>
 </resources>
