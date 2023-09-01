@@ -6,20 +6,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskapp.R
-import com.example.taskapp.databinding.FragmentDoingBinding
 import com.example.taskapp.databinding.FragmentTodoBinding
 import com.example.taskapp.ui.adapter.TaskAdapter
 import com.example.taskapp.ui.data.model.Status
 import com.example.taskapp.ui.data.model.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class TodoFragment : Fragment() {
 	private var _binding: FragmentTodoBinding? = null
 	private val binding get() = _binding!!
 
 	private lateinit var taskAdapter: TaskAdapter
+
+	private lateinit var reference: DatabaseReference
+	private lateinit var auth: FirebaseAuth
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -31,6 +43,9 @@ class TodoFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		reference = Firebase.database.reference
+		auth = Firebase.auth
 
 		initListeners()
 		initRecyclerView()
@@ -76,17 +91,43 @@ class TodoFragment : Fragment() {
 	}
 
 	private fun getTasks() {
-		val taskList = listOf(
-			Task("0", "Criar nova tela do app", Status.TODO),
-			Task("1", "Validar informações na tela do app", Status.TODO),
-			Task("2", "Adicionar nova funcionalidade no app", Status.TODO),
-			Task("3", "Salvar token no localmente", Status.TODO),
-		)
+		reference
+			.child("tasks")
+			.child(auth.currentUser?.uid ?: "")
+			.addValueEventListener(object : ValueEventListener {
+				override fun onDataChange(snapshot: DataSnapshot) {
 
-		taskAdapter.submitList(taskList)
+					val taskList = mutableListOf<Task>()
+
+					for (ds in snapshot.children) {
+						val task = ds.getValue(Task::class.java) as Task
+
+						if (task.status == Status.TODO) {
+							taskList.add(task)
+						}
+
+					}
+
+					binding.progressBar.isVisible = false
+					listEmpty(taskList)
+
+					taskAdapter.submitList(taskList)
+				}
+
+				override fun onCancelled(error: DatabaseError) {
+					Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT).show()
+				}
+
+			})
 	}
 
-
+	private fun listEmpty(taskList: List<Task>) {
+		binding.textInfo.text = if (taskList.isEmpty()) {
+			getString(R.string.text_list_task_empty)
+		} else {
+			""
+		}
+	}
 
 	override fun onDestroyView() {
 		super.onDestroyView()
