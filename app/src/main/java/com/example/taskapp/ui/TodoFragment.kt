@@ -14,6 +14,7 @@ import com.example.taskapp.databinding.FragmentTodoBinding
 import com.example.taskapp.ui.adapter.TaskAdapter
 import com.example.taskapp.ui.data.model.Status
 import com.example.taskapp.ui.data.model.Task
+import com.example.taskapp.util.showBottomSheet
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -54,7 +55,8 @@ class TodoFragment : Fragment() {
 
 	private fun initListeners() {
 		binding.fabAdd.setOnClickListener {
-			findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment)
+			val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(null)
+			findNavController().navigate(action)
 		}
 	}
 
@@ -73,11 +75,19 @@ class TodoFragment : Fragment() {
 	private fun optionSelect(task: Task, option: Int) {
 		when (option) {
 			TaskAdapter.SELECT_REMOVE -> {
-				Toast.makeText(requireContext(), "Removendo ${task.description}", Toast.LENGTH_SHORT).show()
+				showBottomSheet(
+					titleDialog = R.string.text_title_dialog_delete,
+					titleButton = R.string.text_dialog_confirm,
+					message = getString(R.string.text_message_dialog_delete),
+					onClick = {
+						deleteTask(task)
+					}
+				)
 			}
 
 			TaskAdapter.SELECT_EDIT -> {
-				Toast.makeText(requireContext(), "Editando ${task.description}", Toast.LENGTH_SHORT).show()
+				val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(task)
+				findNavController().navigate(action)
 			}
 
 			TaskAdapter.SELECT_DETAILS -> {
@@ -109,7 +119,11 @@ class TodoFragment : Fragment() {
 					}
 
 					binding.progressBar.isVisible = false
+
 					listEmpty(taskList)
+
+					// invertendo a ordem da lista
+					taskList.reverse()
 
 					taskAdapter.submitList(taskList)
 				}
@@ -119,6 +133,21 @@ class TodoFragment : Fragment() {
 				}
 
 			})
+	}
+
+	private fun deleteTask(task: Task) {
+		reference
+			.child("tasks")
+			.child(auth.currentUser?.uid ?: "")
+			.child(task.id)
+			.removeValue().addOnCompleteListener { result ->
+				if (result.isSuccessful) {
+					Toast.makeText(requireContext(), R.string.text_delete_success_task, Toast.LENGTH_SHORT)
+						.show()
+				} else {
+					Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT).show()
+				}
+			}
 	}
 
 	private fun listEmpty(taskList: List<Task>) {
