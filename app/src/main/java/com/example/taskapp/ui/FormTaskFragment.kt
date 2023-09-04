@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.taskapp.R
@@ -35,6 +36,8 @@ class FormTaskFragment : Fragment() {
 	private lateinit var auth: FirebaseAuth
 
 	private val args: FormTaskFragmentArgs by navArgs()
+
+	private val viewModel: TaskViewModel by activityViewModels()
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -144,6 +147,9 @@ class FormTaskFragment : Fragment() {
 						// depois de cadastrar um nova tarefa: ir para tela anterior.
 						findNavController().popBackStack()
 					} else {
+
+						viewModel.setUpdateTask(task)
+
 						// editando a tarefa.
 						Toast.makeText(requireContext(), R.string.save_update_task_fragment, Toast.LENGTH_LONG)
 							.show()

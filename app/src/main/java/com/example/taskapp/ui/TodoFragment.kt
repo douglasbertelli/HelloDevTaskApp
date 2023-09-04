@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskapp.R
@@ -33,6 +34,8 @@ class TodoFragment : Fragment() {
 	private lateinit var reference: DatabaseReference
 	private lateinit var auth: FirebaseAuth
 
+	private val viewModel: TaskViewModel by activityViewModels()
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -57,6 +60,33 @@ class TodoFragment : Fragment() {
 		binding.fabAdd.setOnClickListener {
 			val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(null)
 			findNavController().navigate(action)
+		}
+
+		observeViewModel()
+	}
+
+	private fun observeViewModel() {
+		viewModel.taskUpdate.observe(viewLifecycleOwner) { updateTask ->
+			if (updateTask.status == Status.TODO) {
+
+				// armazenar a lista atual do adapter
+				val oldList = taskAdapter.currentList
+
+				// gerar um nova lista a partir da lista antiga já com a tarefa atualizada
+				val newList = oldList.toMutableList().apply {
+					find { it.id == updateTask.id }?.description = updateTask.description
+				}
+
+				// armazena a posição da tarefa a ser atualizada na lista
+				val position = newList.indexOfFirst { it.id == updateTask.id }
+
+				// envia a lista atualizada para o adapter
+				taskAdapter.submitList(newList)
+
+				// atualiza a tarefa pela posição do adapter
+				taskAdapter.notifyItemChanged(position)
+
+			}
 		}
 	}
 
